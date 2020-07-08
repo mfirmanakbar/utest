@@ -3,6 +3,7 @@ package com.firman.utest.business;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -77,6 +78,35 @@ public class ListMockTest {
 
         assertEquals("SomeString1", allValues.get(0));
         assertEquals("SomeString2", allValues.get(1));
+    }
+
+    /**
+     * The different between MOCKING and SPYING
+     */
+    @Test
+    public void spying() {
+
+        /**
+         * MOCKING
+         * */
+        ArrayList arrayListMock = mock(ArrayList.class);
+        arrayListMock.add("Test0");
+        assertNull(arrayListMock.get(0));
+        assertEquals(0, arrayListMock.size());
+        when(arrayListMock.size()).thenReturn(5);
+        assertEquals(5, arrayListMock.size());
+        verify(arrayListMock).add("Test0");
+
+        /**
+         * SPYING
+         * */
+        ArrayList arrayListSpy = spy(ArrayList.class);
+        arrayListSpy.add("Test0");
+        assertEquals("Test0", arrayListSpy.get(0));
+        assertEquals(1, arrayListSpy.size());
+        when(arrayListSpy.size()).thenReturn(5);
+        assertEquals(5, arrayListSpy.size());
+        verify(arrayListSpy).add("Test0");
     }
 
 }
