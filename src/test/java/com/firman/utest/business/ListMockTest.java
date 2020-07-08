@@ -6,6 +6,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.anyInt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ListMockTest {
@@ -30,6 +31,13 @@ public class ListMockTest {
         when(mock.get(0)).thenReturn("firman");
         assertEquals("firman", mock.get(0));
         assertEquals(null, mock.get(1));
+    }
+
+    @Test
+    public void returnWithGenericParams() {
+        when(mock.get(anyInt())).thenReturn("firman");
+        assertEquals("firman", mock.get(0));
+        assertEquals("firman", mock.get(1));
     }
 
 }
