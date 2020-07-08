@@ -14,22 +14,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(HelloWordController.class)
-public class HelloWordControllerTest {
+@WebMvcTest(ItemController.class)
+public class ItemControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void helloWorld_basic() throws Exception {
+    public void item_basic() throws Exception {
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/hello-world")
+                .get("/item")
                 .accept(MediaType.APPLICATION_JSON);
 
         mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
-                .andExpect(content().string("Hello World"))
+                .andExpect(content().json("{\"id\":1,\"name\":\"Ball\",\"price\":4025,\"quantity\":10}"))
                 .andReturn();
 
     }
