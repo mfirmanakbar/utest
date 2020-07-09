@@ -13,6 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Arrays;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.mockito.Mockito.when;
@@ -53,6 +55,26 @@ public class ItemControllerTest {
         mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"id\":2,\"name\":\"Mac Book Pro\",\"price\":15000000,\"quantity\":20}"))
+                .andReturn();
+
+    }
+
+    @Test
+    public void retrieveItems_basic() throws Exception {
+
+        when(businessService.retrieveItems())
+                .thenReturn(Arrays.asList(
+                        new Item(1, "Item1", 1000, 10),
+                        new Item(2, "Item2", 2000, 20)
+                ));
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .get("/items")
+                .accept(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(requestBuilder)
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{id:1,name:Item1,price:1000,quantity:10},{id:2,name:Item2,price:2000,quantity:20}]"))
                 .andReturn();
 
     }
