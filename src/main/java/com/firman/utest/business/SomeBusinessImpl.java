@@ -2,6 +2,8 @@ package com.firman.utest.business;
 
 import com.firman.utest.data.SomeDataService;
 
+import java.util.Arrays;
+
 public class SomeBusinessImpl {
 
     private SomeDataService someDataService;
@@ -11,17 +13,20 @@ public class SomeBusinessImpl {
     }
 
     public int calculateSum(int[] data) {
-        int sum = 0;
-        for (int value:data) {
+
+        return Arrays.stream(data).reduce(Integer::sum).orElse(0);
+
+        /*int sum = 0;
+        for (int value : data) {
             sum += value;
         }
-        return sum;
+        return sum;*/
     }
 
     public int calculateSumUsingDataService() {
         int sum = 0;
         int[] data = someDataService.retriveAllData();
-        for (int value:data) {
+        for (int value : data) {
             sum += value;
         }
         return sum;
