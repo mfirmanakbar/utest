@@ -49,7 +49,7 @@ public class ItemControllerTest {
         when(businessService.retreivedHardCodedItem()).thenReturn(new Item(2, "Mac Book Pro", 15000000, 20));
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/item-from-business-service")
+                .get("/items-hard-coded")
                 .accept(MediaType.APPLICATION_JSON);
 
         mockMvc.perform(requestBuilder)

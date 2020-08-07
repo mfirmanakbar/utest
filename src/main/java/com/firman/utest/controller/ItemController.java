@@ -19,7 +19,7 @@ public class ItemController {
         return new Item(1, "Ball", 4025, 10);
     }
 
-    @GetMapping("/item-from-business-service")
+    @GetMapping("/items-hard-coded")
     public Item itemFromBusinessService() {
         return itemBusinessService.retreivedHardCodedItem();
     }
